@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string>
 #include "SDL.h"
+#include "graphics\Pixel.h"
 
 namespace Gravity {
 
@@ -28,7 +29,10 @@ namespace Gravity {
 		bool initialize();
 		bool terminate();
 		bool processEvents();
+		void setPixel(Pixel pixel);
+		void update();
 	private:
+		bool initializeComponents();
 		void handleInitializeFailure();
 		void updateScreenToBlack();
 	};

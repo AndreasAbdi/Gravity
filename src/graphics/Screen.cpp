@@ -15,19 +15,12 @@ namespace Gravity {
 			return false;
 		}
 
-		window = SDL_CreateWindow(name,
-			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
-		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
-		texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
-			SDL_TEXTUREACCESS_STATIC, width, height);
-
-		if (renderer == NULL || texture == NULL || window == NULL) {
+		if (initializeComponents() == false) {
 			handleInitializeFailure();
 			return false;
 		}
 
 		buffer = new Uint32[width*height];
-
 		updateScreenToBlack();
 		return true;
 	};
@@ -38,6 +31,21 @@ namespace Gravity {
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
 		return true;
+	};
+
+	void Screen::setPixel(Pixel pixel) {
+
+		int position = pixel.point.y*width + pixel.point.x;
+		buffer[position] = pixel.rgb.rgbaRepresentation;
+	};
+
+	bool Screen::initializeComponents() {
+		window = SDL_CreateWindow(name,
+			SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+		texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
+			SDL_TEXTUREACCESS_STATIC, width, height);
+		return (window != NULL && renderer != NULL && texture != NULL);
 	};
 
 	void Screen::handleInitializeFailure() {
@@ -53,14 +61,16 @@ namespace Gravity {
 		SDL_Quit();
 	}
 
-	void Screen::updateScreenToBlack() {
-		memset(buffer, 0, width*height*sizeof(Uint32));
-
+	void Screen::update() {
 		SDL_UpdateTexture(texture, NULL, buffer, width*sizeof(Uint32));
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, texture, NULL, NULL);
 		SDL_RenderPresent(renderer);
+	}
 
+	void Screen::updateScreenToBlack() {
+		memset(buffer, 0, width*height*sizeof(Uint32));
+		update();
 	};
 
 	bool Screen::processEvents() {
@@ -73,5 +83,7 @@ namespace Gravity {
 		}
 		return true;
 	};
+	
+
 
 }

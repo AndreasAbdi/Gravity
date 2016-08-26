@@ -1,10 +1,13 @@
 set(GRAVITY_SOURCES
     Main.cpp
-    Screen.cpp
+    graphics/Screen.cpp
     )
 
 set(GRAVITY_HEADERS
-    Screen.h
+    graphics/Screen.h
+    graphics/Point.h
+    graphics/RGB.h
+    graphics/Pixel.h
     )
 
 
