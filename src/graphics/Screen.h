@@ -31,6 +31,7 @@ namespace Gravity {
 		bool processEvents();
 		void setPixel(Pixel pixel);
 		void update();
+		Point getSize() { return Point(width, height); };
 	private:
 		bool initializeComponents();
 		void handleInitializeFailure();

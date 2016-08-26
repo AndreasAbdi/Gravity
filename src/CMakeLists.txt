@@ -1,6 +1,10 @@
 set(GRAVITY_SOURCES
     Main.cpp
     graphics/Screen.cpp
+    graphics/PositionConversion.cpp
+    game/Particle.cpp
+    game/ParticleCollection.cpp
+
     )
 
 set(GRAVITY_HEADERS
@@ -8,6 +12,9 @@ set(GRAVITY_HEADERS
     graphics/Point.h
     graphics/RGB.h
     graphics/Pixel.h
+    graphics/PositionConversion.h
+    game/Particle.h
+    game/ParticleCollection.h
     )
 
 
