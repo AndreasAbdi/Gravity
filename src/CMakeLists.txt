@@ -1,4 +1,15 @@
-ADD_EXECUTABLE ( Gravity main.cpp )
+set(GRAVITY_SOURCES
+    Main.cpp
+    Screen.cpp
+    )
+
+set(GRAVITY_HEADERS
+    Screen.h
+    )
+
+
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+ADD_EXECUTABLE ( Gravity ${GRAVITY_SOURCES} ${GRAVITY_HEADERS})
 
 #--------------------------------------------------
 # BOOST
