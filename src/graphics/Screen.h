@@ -2,9 +2,9 @@
 
 #include <iostream>
 #include <stdio.h>
-#include <string>
 #include "SDL.h"
 #include "graphics\Pixel.h"
+#include "DoubleBuffer.h"
 
 namespace Gravity {
 
@@ -21,7 +21,7 @@ namespace Gravity {
 		SDL_Window * window;
 		SDL_Renderer * renderer;
 		SDL_Texture * texture;
-		Uint32 * buffer;
+		DoubleBuffer doubleBuffer;
 	public:
 		Screen(const int width, const int height, const char * name);
 		Screen();
@@ -29,12 +29,15 @@ namespace Gravity {
 		bool initialize();
 		bool terminate();
 		bool processEvents();
-		void setPixel(Pixel pixel);
 		void update();
+		
+		void clear();
+
+		void setPixel(Pixel pixel);
 		Point getSize() { return Point(width, height); };
+
 	private:
 		bool initializeComponents();
 		void handleInitializeFailure();
-		void updateScreenToBlack();
 	};
 }

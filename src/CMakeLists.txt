@@ -1,13 +1,42 @@
+#--------------------------------------------------
+# FILE ORGANIZATION
+#--------------------------------------------------
+
+file (GLOB_RECURSE SRC_GRAPHICS
+    "${CMAKE_CURRENT_SOURCE_DIR}/graphics/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/graphics/*.h"
+)
+
+file (GLOB_RECURSE SRC_GAME
+    "${CMAKE_CURRENT_SOURCE_DIR}/game/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/game/*.h"
+)
+
+file (GLOB_RECURSE SRC_UTILITY
+    "${CMAKE_CURRENT_SOURCE_DIR}/utility/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/utility/*.h"
+)
+
+source_group("graphics" FILES ${SRC_GRAPHICS})
+source_group("game" FILES ${SRC_GAME})
+source_group("utility" FILES ${SRC_UTILITY})
+
+#--------------------------------------------------
+# EXECUTABLE BUILDING
+#--------------------------------------------------
 set(GRAVITY_SOURCES
     Main.cpp
+    graphics/DoubleBuffer.cpp
     graphics/Screen.cpp
+    graphics/Filter.cpp
     graphics/PositionConversion.cpp
     game/Particle.cpp
     game/ParticleCollection.cpp
-
     )
 
 set(GRAVITY_HEADERS
+    graphics/DoubleBuffer.h
+    graphics/Filter.h
     graphics/Screen.h
     graphics/Point.h
     graphics/RGB.h
@@ -15,8 +44,8 @@ set(GRAVITY_HEADERS
     graphics/PositionConversion.h
     game/Particle.h
     game/ParticleCollection.h
+    utility/vector2D.h
     )
-
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 ADD_EXECUTABLE ( Gravity ${GRAVITY_SOURCES} ${GRAVITY_HEADERS})

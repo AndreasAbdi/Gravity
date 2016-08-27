@@ -2,7 +2,7 @@
 
 namespace Gravity {
 	Screen::Screen(const int width, const int height, const char * name) 
-		: window(NULL), renderer(NULL), texture(NULL), buffer(NULL) {
+		: window(NULL), renderer(NULL), texture(NULL) {
 		this->name = name;
 		this->height = height;
 		this->width = width;
@@ -19,14 +19,12 @@ namespace Gravity {
 			handleInitializeFailure();
 			return false;
 		}
-
-		buffer = new Uint32[width*height];
-		updateScreenToBlack();
+		doubleBuffer = DoubleBuffer(width, height);
+		update();
 		return true;
 	};
 
 	bool Screen::terminate() {
-		delete[] buffer;
 		SDL_DestroyTexture(texture);
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
@@ -34,9 +32,7 @@ namespace Gravity {
 	};
 
 	void Screen::setPixel(Pixel pixel) {
-
-		int position = pixel.point.y*width + pixel.point.x;
-		buffer[position] = pixel.rgb.rgbaRepresentation;
+		doubleBuffer.setPixel(pixel);
 	};
 
 	bool Screen::initializeComponents() {
@@ -62,16 +58,16 @@ namespace Gravity {
 	}
 
 	void Screen::update() {
-		SDL_UpdateTexture(texture, NULL, buffer, width*sizeof(Uint32));
+		SDL_UpdateTexture(texture, NULL, doubleBuffer.getFrontBuffer(), width*sizeof(Uint32));
 		SDL_RenderClear(renderer);
 		SDL_RenderCopy(renderer, texture, NULL, NULL);
 		SDL_RenderPresent(renderer);
 	}
 
-	void Screen::updateScreenToBlack() {
-		memset(buffer, 0, width*height*sizeof(Uint32));
+	void Screen::clear(){
+		doubleBuffer.clearFrontBuffer();
 		update();
-	};
+	}
 
 	bool Screen::processEvents() {
 		SDL_Event event;

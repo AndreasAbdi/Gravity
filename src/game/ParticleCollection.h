@@ -12,7 +12,8 @@ namespace Gravity {
 		ParticleCollection(const int size);
 		ParticleCollection() : ParticleCollection(DEFAULT_SIZE) {};
 		virtual ~ParticleCollection();
-		const Particle * const getParticles() { return particles; };
+		void update(double timeElapsed);
+		Particle * const getParticles() { return particles; };
 		int getSize() { return size; };
 	};
 }
