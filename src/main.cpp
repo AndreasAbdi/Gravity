@@ -11,7 +11,7 @@
 #include "SDL.h"
 
 #include "game/ParticleCollection.h"
-#include "graphics/DoubleBuffer.h"
+#include "graphics/Filter.h"
 #include "graphics/Screen.h"
 #include "graphics/Pixel.h"
 #include "graphics/PositionConversion.h"
@@ -83,14 +83,14 @@ int runMainLoop() {
 
 	Gravity::ParticleCollection particleCollection(PARTICLE_NUMBER);
 	setupExplosion(particleCollection);
-
+	Gravity::Filter filter;
 	int previousTime = SDL_GetTicks();
 	while (screen.processEvents()) {
 		//screen.clear();
 		int currentTime = SDL_GetTicks();
 		int timeElapsed(currentTime - previousTime);
 		previousTime = currentTime;
-
+		filter.apply(screen);
 		starScreen(screen, particleCollection, timeElapsed, currentTime);
 		screen.update();
 	}

@@ -34,7 +34,7 @@ namespace Gravity {
 	void DoubleBuffer::swapBuffers() {
 		Uint32 * temporaryBuffer = frontBuffer;
 		frontBuffer = backBuffer;
-		backBuffer = frontBuffer;
+		backBuffer = temporaryBuffer;
 	}
 
 	

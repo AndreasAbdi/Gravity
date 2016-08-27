@@ -21,6 +21,7 @@ namespace Gravity {
 		
 		void setPixel(Pixel pixel);
 		Uint32 * getFrontBuffer() { return frontBuffer; };
+		Uint32 * getBackBuffer() { return backBuffer; };
 	private:
 		void duplicateBuffersFrom(const DoubleBuffer &source);
 		void copyBuffer(Uint32*& target, Uint32 * const source);

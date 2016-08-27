@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stdio.h>
 #include "SDL.h"
+#include "graphics\Filter.h"
 #include "graphics\Pixel.h"
 #include "DoubleBuffer.h"
 
@@ -39,5 +40,7 @@ namespace Gravity {
 	private:
 		bool initializeComponents();
 		void handleInitializeFailure();
+		
+		friend class Filter;
 	};
 }
