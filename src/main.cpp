@@ -49,7 +49,8 @@ void setupExplosion(Gravity::ParticleCollection &particleCollection) {
 	Gravity::Particle * const particles = particleCollection.getParticles();
 	for (int i = 0; i < particleCollection.getSize(); i++) {
 		double direction = (2 * M_PI*rand()) / RAND_MAX;
-		double speed = 0.0002*(1.0*rand()) / RAND_MAX;
+		double speed = 0.02*(1.0*rand()) / RAND_MAX;
+		speed *= speed;
 		double x = speed * cos(direction);
 		double y = speed * sin(direction);
 		vector2D<double> newVelocity(x, y);
@@ -86,12 +87,13 @@ int runMainLoop() {
 	Gravity::Filter filter;
 	int previousTime = SDL_GetTicks();
 	while (screen.processEvents()) {
-		//screen.clear();
 		int currentTime = SDL_GetTicks();
 		int timeElapsed(currentTime - previousTime);
 		previousTime = currentTime;
-		filter.apply(screen);
+
 		starScreen(screen, particleCollection, timeElapsed, currentTime);
+		filter.apply(screen);
+
 		screen.update();
 	}
 
