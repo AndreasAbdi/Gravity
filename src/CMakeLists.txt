@@ -36,6 +36,12 @@ set(GRAVITY_SOURCES
     graphics/Screen.cpp
     graphics/Filter.cpp
     graphics/PositionConversion.cpp
+    game/Character.cpp
+    game/Component.cpp
+    game/GraphicComponent.cpp
+    game/SquareGraphicComponent.cpp
+    game/Command.cpp
+    game/InputManager.cpp
     game/GameLoop.cpp
     game/Particle.cpp
     game/ParticleCollection.cpp
@@ -51,6 +57,12 @@ set(GRAVITY_HEADERS
     graphics/RGB.h
     graphics/Pixel.h
     graphics/PositionConversion.h
+    game/Character.h
+    game/Command.h
+    game/Component.h
+    game/GraphicComponent.h
+    game/SquareGraphicComponent.h
+    game/InputManager.h
     game/GameLoop.h
     game/Particle.h
     game/ParticleCollection.h

@@ -51,15 +51,17 @@ namespace Gravity {
 	}
 
 	void Screen::update() {
-		SDL_UpdateTexture(texture, NULL, doubleBuffer.getFrontBuffer(), width*sizeof(Uint32));
-		SDL_RenderClear(renderer);
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
+		//SDL_UpdateTexture(texture, NULL, doubleBuffer.getFrontBuffer(), width*sizeof(Uint32));
 		SDL_RenderPresent(renderer);
+		//SDL_RenderCopy(renderer, texture, NULL, NULL);
+		//SDL_RenderPresent(renderer);
 	}
 
 	void Screen::clear(){
 		doubleBuffer.clearFrontBuffer();
-		update();
+		//black bg. 
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderClear(renderer);
 	}
 
 	bool Screen::processEvents() {

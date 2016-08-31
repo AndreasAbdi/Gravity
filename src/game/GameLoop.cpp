@@ -10,8 +10,17 @@ namespace Gravity {
 			return 1;
 		}
 		updateRunTime();
+
+		SquareGraphicComponent * graphicComponent = new SquareGraphicComponent();
+		Character character(graphicComponent);
+
 		while (screen.processEvents()) {
 			updateRunTime();
+			
+			auto action = [](int d) -> int {
+				return 1;
+			};
+			character.update(screen);
 			screen.update();
 		}
 		teardown();
@@ -46,6 +55,7 @@ namespace Gravity {
 			return false;
 		}
 
+		screen.clear();
 		return true;
 	}
 

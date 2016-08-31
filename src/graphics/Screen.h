@@ -29,7 +29,7 @@ namespace Gravity {
 
 		void setPixel(Pixel pixel);
 		Point getSize() { return Point(width, height); };
-
+		SDL_Renderer * const getRenderer() const { return this->renderer; };
 	private:
 		bool initializeComponents();
 		void initializeParameters(const int width, const int height, const char * name);
