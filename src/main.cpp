@@ -1,27 +1,9 @@
 #pragma once
-#include <cmath>
-#include <cstdio>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include <string>
+#include "game/GameLoop.h"
+#include "utility/Configurations.h"
 
-#include <boost/regex.hpp>
-
-#include "SDL.h"
-
-#include "game/ParticleCollection.h"
-#include "graphics/Filter.h"
-#include "graphics/Screen.h"
-#include "graphics/Pixel.h"
-#include "graphics/PositionConversion.h"
-#include "utility/vector2D.h"
-
-//TODO: get the boost ini parse and shove configs in an ini. 
-static const int SCREEN_HEIGHT = 768;
-static const int SCREEN_WIDTH = 1024;
-static constexpr const char * SCREEN_NAME = "GRAVITY";
-static const int PARTICLE_NUMBER = 5000;
+//Throwaway whenever. 
+/* Screwing around
 void testBoost() {
 	std::string line = "Subject: Re: GRAVITY";
 	boost::regex pattern("^Subject: (Re: |Aw: )*(.*)$");
@@ -71,36 +53,16 @@ void starScreen(Gravity::Screen &screen, Gravity::ParticleCollection &collection
 
 	}
 }	
+*/
 
-//TODO: Consider converting loop into a class. 
-int runMainLoop() {
-	srand(time(NULL));
-
-	Gravity::Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_NAME);
-	if (screen.initialize() == false) {
-		std::cout << "failed to initialize" << std::endl;
-		return 1;
-	}
-
-	Gravity::ParticleCollection particleCollection(PARTICLE_NUMBER);
-	setupExplosion(particleCollection);
-	Gravity::Filter filter;
-	int previousTime = SDL_GetTicks();
-	while (screen.processEvents()) {
-		int currentTime = SDL_GetTicks();
-		int timeElapsed(currentTime - previousTime);
-		previousTime = currentTime;
-
-		starScreen(screen, particleCollection, timeElapsed, currentTime);
-		filter.apply(screen);
-
-		screen.update();
-	}
-
-	screen.terminate();
-	return 0;
-}
 
 int main(int argc, char* args[]) {
-	return runMainLoop();
+	Gravity::Configurations configurations;
+	configurations.addConfig("SCREEN_HEIGHT", (768));
+	configurations.addConfig("SCREEN_WIDTH", (1024));
+	configurations.addConfig("SCREEN_NAME", std::string("GRAVITY"));
+	configurations.addConfig("SCREEN_PARTICLE", (5000));
+
+	Gravity::GameLoop gameLoop(configurations);
+	return gameLoop.runGameLoop();
 }

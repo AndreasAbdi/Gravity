@@ -10,10 +10,6 @@
 namespace Gravity {
 
 	class Screen {
-	public:
-		static constexpr const char *  DEFAULT_NAME = "DEFAULT NAME";
-		static const int DEFAULT_HEIGHT = 600;
-		static const int DEFAULT_WIDTH = 800;
 	private:
 		int height;
 		int width;
@@ -24,10 +20,7 @@ namespace Gravity {
 		SDL_Texture * texture;
 		DoubleBuffer doubleBuffer;
 	public:
-		Screen(const int width, const int height, const char * name);
-		Screen();
-
-		bool initialize();
+		bool initialize(const int width, const int height, const char * name);
 		bool terminate();
 		bool processEvents();
 		void update();
@@ -39,6 +32,7 @@ namespace Gravity {
 
 	private:
 		bool initializeComponents();
+		void initializeParameters(const int width, const int height, const char * name);
 		void handleInitializeFailure();
 		
 		friend class Filter;

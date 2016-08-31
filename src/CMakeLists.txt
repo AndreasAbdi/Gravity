@@ -12,6 +12,12 @@ file (GLOB_RECURSE SRC_GAME
     "${CMAKE_CURRENT_SOURCE_DIR}/game/*.h"
 )
 
+
+file (GLOB_RECURSE SRC_SDL
+    "${CMAKE_CURRENT_SOURCE_DIR}/sdl/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/sdl/*.h"
+)
+
 file (GLOB_RECURSE SRC_UTILITY
     "${CMAKE_CURRENT_SOURCE_DIR}/utility/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/utility/*.h"
@@ -20,7 +26,7 @@ file (GLOB_RECURSE SRC_UTILITY
 source_group("graphics" FILES ${SRC_GRAPHICS})
 source_group("game" FILES ${SRC_GAME})
 source_group("utility" FILES ${SRC_UTILITY})
-
+source_group("sdl" FILES ${SRC_SDL})
 #--------------------------------------------------
 # EXECUTABLE BUILDING
 #--------------------------------------------------
@@ -30,8 +36,11 @@ set(GRAVITY_SOURCES
     graphics/Screen.cpp
     graphics/Filter.cpp
     graphics/PositionConversion.cpp
+    game/GameLoop.cpp
     game/Particle.cpp
     game/ParticleCollection.cpp
+    sdl/SDLWrapper.cpp
+    utility/Configurations.cpp
     )
 
 set(GRAVITY_HEADERS
@@ -42,9 +51,12 @@ set(GRAVITY_HEADERS
     graphics/RGB.h
     graphics/Pixel.h
     graphics/PositionConversion.h
+    game/GameLoop.h
     game/Particle.h
     game/ParticleCollection.h
+    sdl/SDLWrapper.h
     utility/vector2D.h
+    utility/Configurations.h
     )
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
@@ -54,6 +66,7 @@ ADD_EXECUTABLE ( Gravity ${GRAVITY_SOURCES} ${GRAVITY_HEADERS})
 # BOOST
 #--------------------------------------------------
 set (BOOST_ROOT "C:/programming/libraries/boost_1_60_0")
+#set (Boost_INCLUDE_DIR "C:/programming/libraries/boost_1_60_0/boost")
 set(Boost_USE_STATIC_LIBS ON)
 
 FIND_PACKAGE( Boost 1.60 REQUIRED COMPONENTS regex)

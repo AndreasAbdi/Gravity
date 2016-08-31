@@ -1,20 +1,8 @@
 #include "Screen.h"
 
 namespace Gravity {
-	Screen::Screen(const int width, const int height, const char * name) 
-		: window(NULL), renderer(NULL), texture(NULL) {
-		this->name = name;
-		this->height = height;
-		this->width = width;
-	};
-
-	Screen::Screen() : Screen(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_NAME) {};
-
-	bool Screen::initialize() {
-		if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-			return false;
-		}
-
+	bool Screen::initialize(const int width, const int height, const char * name) {
+		initializeParameters(width, height, name);
 		if (initializeComponents() == false) {
 			handleInitializeFailure();
 			return false;
@@ -42,6 +30,12 @@ namespace Gravity {
 		texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
 			SDL_TEXTUREACCESS_STATIC, width, height);
 		return (window != NULL && renderer != NULL && texture != NULL);
+	}
+
+	void Screen::initializeParameters(const int width, const int height, const char * name) {
+		this->name = name;
+		this->height = height;
+		this->width = width;
 	};
 
 	void Screen::handleInitializeFailure() {
@@ -54,7 +48,6 @@ namespace Gravity {
 		if (window != NULL) {
 			SDL_DestroyWindow(window);
 		}
-		SDL_Quit();
 	}
 
 	void Screen::update() {
