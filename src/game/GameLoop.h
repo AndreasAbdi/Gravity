@@ -11,8 +11,10 @@
 #include "graphics/Screen.h"
 #include "game/Character.h"
 #include "game/SquareGraphicComponent.h"
-
+#include "game/InputManager.h"
+#include "game/Command.h"
 namespace Gravity {
+
 	class GameLoop {
 	private:
 		Screen screen;

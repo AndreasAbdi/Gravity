@@ -1,12 +1,9 @@
 #include "Character.h"
 
 namespace Gravity {
-	Character::Character(GraphicComponent * graphicComponent) {
-		this->graphicComponent = graphicComponent;
-	}
 
 	void Character::moveBy(vector2D<double> moveVector) {
-		return;
+		this->position += moveVector;
 	}
 
 	vector2D<double> Character::getPosition() const {

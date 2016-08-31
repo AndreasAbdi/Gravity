@@ -14,7 +14,8 @@ namespace Gravity {
 		vector2D<double> size;
 		GraphicComponent * graphicComponent;
 	public:
-		Character(GraphicComponent * graphicComponent);
+		Character(GraphicComponent * inputGraphicComponent, vector2D<double> inputPosition, vector2D<double> inputSize) :
+			position(inputPosition), size(inputSize), graphicComponent(inputGraphicComponent) {};
 		void moveBy(vector2D<double> moveVector);
 		vector2D<double> getPosition() const;
 		vector2D<double> getSize() const;
