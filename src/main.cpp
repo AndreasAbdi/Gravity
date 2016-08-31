@@ -1,23 +1,9 @@
 #pragma once
-#include <cmath>
-#include <cstdio>
-#include <vector>
-#include <iostream>
-#include <algorithm>
-#include "game/ParticleCollection.h"
+#include "game/GameLoop.h"
+#include "utility/Configurations.h"
 
-#include <boost/regex.hpp>
-
-#include "SDL.h"
-#include <string>
-#include "graphics/Screen.h"
-#include "graphics/Pixel.h"
-#include "graphics/PositionConversion.h"
-//TODO: get the boost ini parse and shove configs in an ini. 
-static const int SCREEN_HEIGHT = 768;
-static const int SCREEN_WIDTH = 1024;
-static constexpr const char * SCREEN_NAME = "GRAVITY";
-static const int PARTICLE_NUMBER = 5000;
+//Throwaway whenever. 
+/* Screwing around
 void testBoost() {
 	std::string line = "Subject: Re: GRAVITY";
 	boost::regex pattern("^Subject: (Re: |Aw: )*(.*)$");
@@ -41,38 +27,42 @@ void rainbow( Gravity::Screen &screen) {
 	}
 }
 
-void starScreen(Gravity::Screen &screen, Gravity::ParticleCollection &collection) {
-	const Gravity::Particle * const particles = collection.getParticles();
+void setupExplosion(Gravity::ParticleCollection &particleCollection) {
+	Gravity::Particle * const particles = particleCollection.getParticles();
+	for (int i = 0; i < particleCollection.getSize(); i++) {
+		double direction = (2 * M_PI*rand()) / RAND_MAX;
+		double speed = 0.02*(1.0*rand()) / RAND_MAX;
+		speed *= speed;
+		double x = speed * cos(direction);
+		double y = speed * sin(direction);
+		vector2D<double> newVelocity(x, y);
+		particles[i].setVelocity(newVelocity);
+	}
+
+}
+void starScreen(Gravity::Screen &screen, Gravity::ParticleCollection &collection, int timeElapsed, int currentTime) {
+	Gravity::Particle * const particles = collection.getParticles();
+	collection.update(timeElapsed);
 	for (int i = 0; i < collection.getSize(); i++) {
-		Gravity::Particle particle = particles[i];
-		Gravity::Point particleScreenCoordinates = Gravity::cartesianToScreenCoordinates(Gravity::Point(particle.x, particle.y), screen.getSize());
-		int timeElapsed = SDL_GetTicks();
+		Gravity::Point particleScreenCoordinates = Gravity::cartesianToScreenCoordinates(Gravity::Point(particles[i].x, particles[i].y), screen.getSize());
 		//shift from [-1,1] to [0,2) to [0,256);
-		Uint8 r = (Uint8)((1 + sin(timeElapsed*0.001)) * 128);
-		Uint8 g = (Uint8)((1 + sin(timeElapsed*0.002)) * 128);
-		Uint8 b = (Uint8)((1 + sin(timeElapsed*0.003)) * 128);
+		Uint8 r = (Uint8)((1 + sin(currentTime*0.001)) * 128);
+		Uint8 g = (Uint8)((1 + sin(currentTime*0.002)) * 128);
+		Uint8 b = (Uint8)((1 + sin(currentTime*0.003)) * 128);
 		screen.setPixel(Gravity::Pixel(Gravity::RGB(r, g, b), particleScreenCoordinates));
 
 	}
-}
+}	
+*/
 
-//TODO: Consider converting loop into a class. 
-int runMainLoop() {
-	Gravity::Screen screen(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_NAME);
-	if (screen.initialize() == false) {
-		std::cout << "failed to initialize" << std::endl;
-		return 1;
-	}
-	Gravity::ParticleCollection particleCollection(PARTICLE_NUMBER);
-	while (screen.processEvents()) {
-		starScreen(screen, particleCollection);
-		screen.update();
-	}
-
-	screen.terminate();
-	return 0;
-}
 
 int main(int argc, char* args[]) {
-	return runMainLoop();
+	Gravity::Configurations configurations;
+	configurations.addConfig("SCREEN_HEIGHT", (768));
+	configurations.addConfig("SCREEN_WIDTH", (1024));
+	configurations.addConfig("SCREEN_NAME", std::string("GRAVITY"));
+	configurations.addConfig("SCREEN_PARTICLE", (5000));
+
+	Gravity::GameLoop gameLoop(configurations);
+	return gameLoop.runGameLoop();
 }

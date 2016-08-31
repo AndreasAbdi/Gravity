@@ -1,32 +1,18 @@
 #include "Screen.h"
 
 namespace Gravity {
-	Screen::Screen(const int width, const int height, const char * name) 
-		: window(NULL), renderer(NULL), texture(NULL), buffer(NULL) {
-		this->name = name;
-		this->height = height;
-		this->width = width;
-	};
-
-	Screen::Screen() : Screen(DEFAULT_WIDTH, DEFAULT_HEIGHT, DEFAULT_NAME) {};
-
-	bool Screen::initialize() {
-		if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-			return false;
-		}
-
+	bool Screen::initialize(const int width, const int height, const char * name) {
+		initializeParameters(width, height, name);
 		if (initializeComponents() == false) {
 			handleInitializeFailure();
 			return false;
 		}
-
-		buffer = new Uint32[width*height];
-		updateScreenToBlack();
+		doubleBuffer = DoubleBuffer(width, height);
+		update();
 		return true;
 	};
 
 	bool Screen::terminate() {
-		delete[] buffer;
 		SDL_DestroyTexture(texture);
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
@@ -34,9 +20,7 @@ namespace Gravity {
 	};
 
 	void Screen::setPixel(Pixel pixel) {
-
-		int position = pixel.point.y*width + pixel.point.x;
-		buffer[position] = pixel.rgb.rgbaRepresentation;
+		doubleBuffer.setPixel(pixel);
 	};
 
 	bool Screen::initializeComponents() {
@@ -46,6 +30,12 @@ namespace Gravity {
 		texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888,
 			SDL_TEXTUREACCESS_STATIC, width, height);
 		return (window != NULL && renderer != NULL && texture != NULL);
+	}
+
+	void Screen::initializeParameters(const int width, const int height, const char * name) {
+		this->name = name;
+		this->height = height;
+		this->width = width;
 	};
 
 	void Screen::handleInitializeFailure() {
@@ -58,20 +48,21 @@ namespace Gravity {
 		if (window != NULL) {
 			SDL_DestroyWindow(window);
 		}
-		SDL_Quit();
 	}
 
 	void Screen::update() {
-		SDL_UpdateTexture(texture, NULL, buffer, width*sizeof(Uint32));
-		SDL_RenderClear(renderer);
-		SDL_RenderCopy(renderer, texture, NULL, NULL);
+		//SDL_UpdateTexture(texture, NULL, doubleBuffer.getFrontBuffer(), width*sizeof(Uint32));
 		SDL_RenderPresent(renderer);
+		//SDL_RenderCopy(renderer, texture, NULL, NULL);
+		//SDL_RenderPresent(renderer);
 	}
 
-	void Screen::updateScreenToBlack() {
-		memset(buffer, 0, width*height*sizeof(Uint32));
-		update();
-	};
+	void Screen::clear(){
+		doubleBuffer.clearFrontBuffer();
+		//black bg. 
+		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+		SDL_RenderClear(renderer);
+	}
 
 	bool Screen::processEvents() {
 		SDL_Event event;
