@@ -20,7 +20,8 @@ namespace Gravity {
 		InputManager inputManager;
 		std::vector<Command> commands;
 		SquareGraphicComponent * graphicComponent = new SquareGraphicComponent();
-		Character character(graphicComponent, vector2D<double>(500,300), vector2D<double>(50, 50));
+		SquarePhysicsComponent * physicsComponent = new SquarePhysicsComponent(vector2D<double>(300, 300), vector2D<double>(50, 50));
+		Character character(graphicComponent, physicsComponent, vector2D<double>(500,300), vector2D<double>(50, 50));
 		Command toTheRight(move(character, vector2D<double>(0, 1)), SDLK_d);
 		commands.push_back(Command(move(character, vector2D<double>(1, 0)),SDL_SCANCODE_D));
 		commands.push_back(Command(move(character, vector2D<double>(-1, 0)), SDL_SCANCODE_A));

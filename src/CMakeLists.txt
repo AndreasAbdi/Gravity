@@ -39,6 +39,9 @@ set(GRAVITY_SOURCES
     game/Character.cpp
     game/Component.cpp
     game/GraphicComponent.cpp
+    game/PhysicsComponent.cpp
+    game/SquareFactory.cpp
+    game/SquarePhysicsComponent.cpp
     game/SquareGraphicComponent.cpp
     game/Command.cpp
     game/InputManager.cpp
@@ -61,6 +64,9 @@ set(GRAVITY_HEADERS
     game/Command.h
     game/Component.h
     game/GraphicComponent.h
+    game/PhysicsComponent.h
+    game/SquareFactory.h
+    game/SquarePhysicsComponent.h
     game/SquareGraphicComponent.h
     game/InputManager.h
     game/GameLoop.h
