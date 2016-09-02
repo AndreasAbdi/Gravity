@@ -1,5 +1,11 @@
-#pragma once
+#include "game/InputManagerBuild.h"
 
-InputManager buildInputManager() {
-    InputManager
+namespace Gravity {
+	InputManager buildInputManager(World &world) {
+		InputManager inputManager;
+		CommandBuilder commandBuilder;
+		inputManager.setCommands(commandBuilder.buildCommands(world));
+		return inputManager;
+	}
 }
+

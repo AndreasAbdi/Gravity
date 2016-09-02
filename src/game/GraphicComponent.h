@@ -7,6 +7,6 @@ namespace Gravity {
 
 	class GraphicComponent : public Component {
 	public:
-		virtual void update(const Character& character, const PhysicsComponent& physicsComponent, Screen &screen) = 0;
+		virtual void update(const PhysicsComponent& physicsComponent, Screen &screen) = 0;
 	};
 }

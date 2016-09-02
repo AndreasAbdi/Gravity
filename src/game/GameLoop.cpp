@@ -9,19 +9,15 @@ namespace Gravity {
 		if (!setupUsingConfigurations()) {
 			return 1;
 		}
-		updateRunTime();
-
-		//TESTING
-
-		inputManager.setCommands(commands);
 		World world;
-		//TESTING
+		InputManager inputManager = buildInputManager(world);
+		updateRunTime();
 
 		while (screen.processEvents()) {
 			updateRunTime();
 			screen.clear();
 			inputManager.handleInput();
-			character.update(screen);
+			world.update(screen);
 			screen.update();
 		}
 		teardown();

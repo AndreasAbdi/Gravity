@@ -7,6 +7,6 @@
 namespace Gravity {
 	class SquareGraphicComponent : public GraphicComponent {
 	public:	
-		void update(const Character& character, const PhysicsComponent &physicsComponent, Screen &screen);
+		void update(const PhysicsComponent &physicsComponent, Screen &screen);
 	};
 }

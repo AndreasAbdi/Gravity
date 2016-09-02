@@ -1,7 +1,7 @@
 #include "game/SquareGraphicComponent.h"
 
 namespace Gravity {
-	void SquareGraphicComponent::update(const Character &character, const PhysicsComponent &physicsComponent, Screen &screen) {
+	void SquareGraphicComponent::update(const PhysicsComponent &physicsComponent, Screen &screen) {
 		SDL_Renderer * renderer = screen.getRenderer();
 		SDL_Rect r;
 		r.x = physicsComponent.position.x;

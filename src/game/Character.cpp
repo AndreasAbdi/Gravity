@@ -11,7 +11,7 @@ namespace Gravity {
 	};
 
 	void Character::update(Screen &screen) {
-		physicsComponent->update(*this);
-		graphicComponent->update(*this, *(this->physicsComponent), screen);
+		physicsComponent->update();
+		graphicComponent->update(*(this->physicsComponent), screen);
 	};
 }

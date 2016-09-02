@@ -11,6 +11,7 @@
 #include "graphics/Screen.h"
 #include "game/World.h"
 #include "game/InputManager.h"
+#include "game/InputManagerBuild.h"
 
 namespace Gravity {
 

@@ -15,6 +15,6 @@ namespace Gravity {
 		void moveBy(vector2D<double> moveVector);
 		void addToVelocity(vector2D<double> velocityVector);
 		
-		virtual void update(const Character& character) = 0;
+		virtual void update() = 0;
 	};
 }
