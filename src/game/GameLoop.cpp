@@ -6,7 +6,7 @@ namespace Gravity {
 	};
 	std::function<void()> move(Character &character, vector2D<double> moveVector) {
 		return [&character, moveVector]() {
-			character.moveBy(moveVector);
+			character.physicsComponent->moveBy(moveVector);
 		};
 	};
 
@@ -20,8 +20,8 @@ namespace Gravity {
 		InputManager inputManager;
 		std::vector<Command> commands;
 		SquareGraphicComponent * graphicComponent = new SquareGraphicComponent();
-		SquarePhysicsComponent * physicsComponent = new SquarePhysicsComponent(vector2D<double>(300, 300), vector2D<double>(50, 50));
-		Character character(graphicComponent, physicsComponent, vector2D<double>(500,300), vector2D<double>(50, 50));
+		SquarePhysicsComponent * physicsComponent = new SquarePhysicsComponent(vector2D<double>(300, 300), vector2D<double>(0,0), vector2D<double>(50, 50));
+		Character character(graphicComponent, physicsComponent);
 		Command toTheRight(move(character, vector2D<double>(0, 1)), SDLK_d);
 		commands.push_back(Command(move(character, vector2D<double>(1, 0)),SDL_SCANCODE_D));
 		commands.push_back(Command(move(character, vector2D<double>(-1, 0)), SDL_SCANCODE_A));
@@ -34,9 +34,6 @@ namespace Gravity {
 			updateRunTime();
 			screen.clear();
 			inputManager.handleInput();
-			//commands[0].action();
-			//toTheRight.action();
-			//character.moveBy(vector2D<double>(0, 1));
 			character.update(screen);
 			screen.update();
 		}

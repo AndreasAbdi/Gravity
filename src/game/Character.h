@@ -11,17 +11,12 @@ namespace Gravity {
 	class PhysicsComponent;
 
 	class Character {
-	private:
-		vector2D<double> position;
-		vector2D<double> size;
+	public:
 		GraphicComponent * graphicComponent;
 		PhysicsComponent * physicsComponent;
 	public:
-		Character(GraphicComponent * inputGraphicComponent, PhysicsComponent * inputPhysicsComponent, vector2D<double> inputPosition, vector2D<double> inputSize) :
-			position(inputPosition), size(inputSize), graphicComponent(inputGraphicComponent), physicsComponent(inputPhysicsComponent) {};
-		void moveBy(vector2D<double> moveVector);
-		vector2D<double> getPosition() const;
-		vector2D<double> getSize() const;
+		Character(GraphicComponent * inputGraphicComponent, PhysicsComponent * inputPhysicsComponent) :
+			graphicComponent(inputGraphicComponent), physicsComponent(inputPhysicsComponent) {};
 		void update(Screen &screen);
 	};
 }

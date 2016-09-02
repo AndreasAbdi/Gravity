@@ -1,13 +1,13 @@
 #include "game/SquareGraphicComponent.h"
 
 namespace Gravity {
-	void SquareGraphicComponent::update(const Character &character, Screen &screen) {
+	void SquareGraphicComponent::update(const Character &character, const PhysicsComponent &physicsComponent, Screen &screen) {
 		SDL_Renderer * renderer = screen.getRenderer();
 		SDL_Rect r;
-		r.x = character.getPosition().x;
-		r.y = character.getPosition().y;
-		r.w = character.getSize().x;
-		r.h = character.getSize().y;
+		r.x = physicsComponent.position.x;
+		r.y = physicsComponent.position.y;
+		r.w = physicsComponent.size.x;
+		r.h = physicsComponent.size.y;
 
 		// Set render color to blue ( rect will be rendered in this color )
 		SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);

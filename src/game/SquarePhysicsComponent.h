@@ -6,12 +6,8 @@
 namespace Gravity {
 	class SquarePhysicsComponent : public PhysicsComponent {
 	public:
-		vector2D<double> position;
-		vector2D<double> velocity;
-		
-	public:
-		SquarePhysicsComponent(vector2D<double> inputPosition, vector2D<double> inputVelocity) 
-			: position(inputPosition), velocity(inputVelocity) {};
+		SquarePhysicsComponent(vector2D<double> inputPosition, vector2D<double> inputVelocity, vector2D<double> inputSize) 
+			: PhysicsComponent(inputPosition, inputVelocity, inputSize) {};
 		void update(const Character& character);
 	};
 }
