@@ -41,15 +41,18 @@ set(GRAVITY_SOURCES
     game/GraphicComponent.cpp
     game/PhysicsComponent.cpp
     game/SquareFactory.cpp
+    game/CommandBuilder.cpp
     game/SquarePhysicsComponent.cpp
     game/SquareGraphicComponent.cpp
     game/Command.cpp
     game/InputManager.cpp
+    game/InputManagerBuild.cpp
     game/GameLoop.cpp
     game/Particle.cpp
     game/ParticleCollection.cpp
     sdl/SDLWrapper.cpp
     utility/Configurations.cpp
+    game/World.cpp
     )
 
 set(GRAVITY_HEADERS
@@ -62,13 +65,16 @@ set(GRAVITY_HEADERS
     graphics/PositionConversion.h
     game/Character.h
     game/Command.h
+    game/World.h
     game/Component.h
+    game/CommandBuilder.h
     game/GraphicComponent.h
     game/PhysicsComponent.h
     game/SquareFactory.h
     game/SquarePhysicsComponent.h
     game/SquareGraphicComponent.h
     game/InputManager.h
+    game/InputManagerBuild.h
     game/GameLoop.h
     game/Particle.h
     game/ParticleCollection.h

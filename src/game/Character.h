@@ -15,8 +15,10 @@ namespace Gravity {
 		GraphicComponent * graphicComponent;
 		PhysicsComponent * physicsComponent;
 	public:
+		Character();
 		Character(GraphicComponent * inputGraphicComponent, PhysicsComponent * inputPhysicsComponent) :
 			graphicComponent(inputGraphicComponent), physicsComponent(inputPhysicsComponent) {};
+		void setComponents(GraphicComponent * inputGraphicComponent, PhysicsComponent * inputPhysicsComponent);
 		void update(Screen &screen);
 	};
 }

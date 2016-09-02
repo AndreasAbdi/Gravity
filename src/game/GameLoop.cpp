@@ -4,11 +4,6 @@ namespace Gravity {
 	GameLoop::GameLoop(Configurations configurations) {
 		this->configurations = configurations;
 	};
-	std::function<void()> move(Character &character, vector2D<double> moveVector) {
-		return [&character, moveVector]() {
-			character.physicsComponent->addToVelocity(moveVector);
-		};
-	};
 
 	int Gravity::GameLoop::runGameLoop() {
 		if (!setupUsingConfigurations()) {
@@ -17,17 +12,9 @@ namespace Gravity {
 		updateRunTime();
 
 		//TESTING
-		InputManager inputManager;
-		std::vector<Command> commands;
-		SquareGraphicComponent * graphicComponent = new SquareGraphicComponent();
-		SquarePhysicsComponent * physicsComponent = new SquarePhysicsComponent(vector2D<double>(300, 300), vector2D<double>(0,0), vector2D<double>(50, 50));
-		Character character(graphicComponent, physicsComponent);
-		Command toTheRight(move(character, vector2D<double>(0, 1)), SDLK_d);
-		commands.push_back(Command(move(character, vector2D<double>(0.01, 0)),SDL_SCANCODE_D));
-		commands.push_back(Command(move(character, vector2D<double>(-0.01, 0)), SDL_SCANCODE_A));
-		commands.push_back(Command(move(character, vector2D<double>(0, 0.01)), SDL_SCANCODE_S));
-		commands.push_back(Command(move(character, vector2D<double>(0, -0.01)), SDL_SCANCODE_W));
+
 		inputManager.setCommands(commands);
+		World world;
 		//TESTING
 
 		while (screen.processEvents()) {
@@ -38,7 +25,6 @@ namespace Gravity {
 			screen.update();
 		}
 		teardown();
-		delete graphicComponent;
 		return 0;
 	}
 
