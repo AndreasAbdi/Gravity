@@ -5,4 +5,8 @@ namespace Gravity {
 		this->position += moveVector;
 	}
 
+	void PhysicsComponent::addToVelocity(vector2D<double> velocityVector) {
+		this->velocity += velocityVector;
+	}
+
 }

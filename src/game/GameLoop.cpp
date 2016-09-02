@@ -6,7 +6,7 @@ namespace Gravity {
 	};
 	std::function<void()> move(Character &character, vector2D<double> moveVector) {
 		return [&character, moveVector]() {
-			character.physicsComponent->moveBy(moveVector);
+			character.physicsComponent->addToVelocity(moveVector);
 		};
 	};
 
@@ -23,10 +23,10 @@ namespace Gravity {
 		SquarePhysicsComponent * physicsComponent = new SquarePhysicsComponent(vector2D<double>(300, 300), vector2D<double>(0,0), vector2D<double>(50, 50));
 		Character character(graphicComponent, physicsComponent);
 		Command toTheRight(move(character, vector2D<double>(0, 1)), SDLK_d);
-		commands.push_back(Command(move(character, vector2D<double>(1, 0)),SDL_SCANCODE_D));
-		commands.push_back(Command(move(character, vector2D<double>(-1, 0)), SDL_SCANCODE_A));
-		commands.push_back(Command(move(character, vector2D<double>(0, 1)), SDL_SCANCODE_S));
-		commands.push_back(Command(move(character, vector2D<double>(0, -1)), SDL_SCANCODE_W));
+		commands.push_back(Command(move(character, vector2D<double>(0.01, 0)),SDL_SCANCODE_D));
+		commands.push_back(Command(move(character, vector2D<double>(-0.01, 0)), SDL_SCANCODE_A));
+		commands.push_back(Command(move(character, vector2D<double>(0, 0.01)), SDL_SCANCODE_S));
+		commands.push_back(Command(move(character, vector2D<double>(0, -0.01)), SDL_SCANCODE_W));
 		inputManager.setCommands(commands);
 		//TESTING
 

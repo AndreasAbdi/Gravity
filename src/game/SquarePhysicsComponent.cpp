@@ -2,6 +2,6 @@
 
 namespace Gravity {
 	void SquarePhysicsComponent::update(const Character &character) {
-		//TODO
+		this->position += this->velocity;
 	};
 };
