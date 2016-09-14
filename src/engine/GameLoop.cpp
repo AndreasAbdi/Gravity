@@ -9,15 +9,15 @@ namespace Gravity {
 		if (!setupUsingConfigurations()) {
 			return 1;
 		}
-		World world;
-		InputManager inputManager = buildInputManager(world);
+		Game game;
+		InputManager inputManager = buildInputManager(game);
 		updateRunTime();
 
 		while (screen.processEvents()) {
 			updateRunTime();
 			screen.clear();
 			inputManager.handleInput();
-			world.update(screen);
+			game.world.update(screen);
 			screen.update();
 		}
 		teardown();
@@ -37,7 +37,7 @@ namespace Gravity {
 	}
 
 	bool GameLoop::setupUsingConfigurations() {
-		srand(time(NULL));
+		srand((unsigned int) time(NULL));
 
 		int screenWidth, screenHeight;
 		std::string screenName;

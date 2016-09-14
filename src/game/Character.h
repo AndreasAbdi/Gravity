@@ -4,21 +4,22 @@
 #include "engine/Component.h"
 #include "engine/GraphicComponent.h"
 #include "engine/PhysicsComponent.h"
+#include "engine/World.h"
 
 namespace Gravity {
-
-	class GraphicComponent;
-	class PhysicsComponent;
-
 	class Character {
 	public:
-		GraphicComponent * graphicComponent;
-		PhysicsComponent * physicsComponent;
+		World * world;
+		int index;
 	public:
 		Character();
-		Character(GraphicComponent * inputGraphicComponent, PhysicsComponent * inputPhysicsComponent) :
-			graphicComponent(inputGraphicComponent), physicsComponent(inputPhysicsComponent) {};
-		void setComponents(GraphicComponent * inputGraphicComponent, PhysicsComponent * inputPhysicsComponent);
+		Character(World * inputWorld, int inputIndex) : world(inputWorld), index(inputIndex) {};
+
 		void update(Screen &screen);
+
+		void setWorldConfiguration(int index, World * world) {
+			this->index = index;
+			this->world = world;
+		}
 	};
 }

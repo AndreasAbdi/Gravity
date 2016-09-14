@@ -1,9 +1,7 @@
 #pragma once
-#include "game/Character.h"
+#include <vector>
 #include "PhysicsComponent.h"
 #include "GraphicComponent.h"
-#include "game/SquareGraphicComponent.h"
-#include "game/SquarePhysicsComponent.h"
 #include "graphics/Screen.h"
 
 namespace Gravity {
@@ -11,19 +9,21 @@ namespace Gravity {
 	public:
 		//TODO: handle edge cases
 		static const int MAX_ELEM = 5000;
-		Character player;
-
-	private:
-		int currentObjectIndex;
 		PhysicsComponent * physicsComponents[MAX_ELEM];
 		GraphicComponent * graphicComponents[MAX_ELEM];
+	private:
+		int sizeOfIndexes;
+		bool entityAtIndex[MAX_ELEM] = {};
+		std::vector<int> freePositions;
+		std::vector<int> filledPositions;
+
 
 	public:
 		World();
 		~World();
 		void update(Screen &screen);
-
-	private:
-		void createPlayer();
+		void update(Screen &screen, int index);
+		int addEntity(PhysicsComponent *physicsComponent, GraphicComponent *graphicComponent);
+		void deleteEntity(int index);
 	};
 }

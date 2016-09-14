@@ -2,8 +2,8 @@
 #include "input/CommandBuilder.h"
 #include "input/Command.h"
 #include "input/InputManager.h"
-#include "engine/World.h"
+#include "game/Game.h"
 
 namespace Gravity {
-	InputManager buildInputManager(World &world);
+	InputManager buildInputManager(Game &game);
 }

@@ -2,11 +2,11 @@
 
 #include <vector>
 #include "input/Command.h"
-#include "engine/World.h"
+#include "game/Game.h"
 
 namespace Gravity {
 	class CommandBuilder {
 	public:
-		std::vector<Command> buildCommands(World &world);
+		std::vector<Command> buildCommands(Game &game);
 	};
 }

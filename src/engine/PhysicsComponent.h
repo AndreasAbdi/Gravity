@@ -1,6 +1,7 @@
 #pragma once
-#include "game/Character.h"
+#include "engine/Component.h"
 #include "utility/vector2D.h"
+
 namespace Gravity {
 
 	class PhysicsComponent : public Component {

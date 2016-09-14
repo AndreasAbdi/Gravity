@@ -9,6 +9,7 @@
 #include "sdl/SDLWrapper.h"
 #include "utility/Configurations.h"
 #include "graphics/Screen.h"
+#include "game/Game.h"
 #include "engine/World.h"
 #include "input/InputManager.h"
 #include "input/InputManagerBuild.h"
