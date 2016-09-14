@@ -1,5 +1,5 @@
 #pragma once 
-#include "game/PhysicsComponent.h"
+#include "engine/PhysicsComponent.h"
 #include "game/Character.h"
 #include "utility/vector2D.h"
 

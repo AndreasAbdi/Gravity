@@ -1,4 +1,4 @@
-#include "game/PhysicsComponent.h"
+#include "engine/PhysicsComponent.h"
 
 namespace Gravity {
 	void PhysicsComponent::moveBy(vector2D<double> moveVector) {

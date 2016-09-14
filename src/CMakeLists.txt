@@ -12,6 +12,15 @@ file (GLOB_RECURSE SRC_GAME
     "${CMAKE_CURRENT_SOURCE_DIR}/game/*.h"
 )
 
+file (GLOB_RECURSE SRC_ENGINE
+    "${CMAKE_CURRENT_SOURCE_DIR}/engine/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/engine/*.h"
+)
+
+file (GLOB_RECURSE SRC_INPUT
+    "${CMAKE_CURRENT_SOURCE_DIR}/input/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/input/*.h"
+)
 
 file (GLOB_RECURSE SRC_SDL
     "${CMAKE_CURRENT_SOURCE_DIR}/sdl/*.cpp"
@@ -25,11 +34,15 @@ file (GLOB_RECURSE SRC_UTILITY
 
 source_group("graphics" FILES ${SRC_GRAPHICS})
 source_group("game" FILES ${SRC_GAME})
+source_group("engine" FILES ${SRC_ENGINE})
+source_group("input" FILES ${SRC_INPUT})
 source_group("utility" FILES ${SRC_UTILITY})
 source_group("sdl" FILES ${SRC_SDL})
+
 #--------------------------------------------------
 # EXECUTABLE BUILDING
 #--------------------------------------------------
+
 set(GRAVITY_SOURCES
     Main.cpp
     graphics/DoubleBuffer.cpp
@@ -37,22 +50,22 @@ set(GRAVITY_SOURCES
     graphics/Filter.cpp
     graphics/PositionConversion.cpp
     game/Character.cpp
-    game/Component.cpp
-    game/GraphicComponent.cpp
-    game/PhysicsComponent.cpp
-    game/SquareFactory.cpp
-    game/CommandBuilder.cpp
     game/SquarePhysicsComponent.cpp
     game/SquareGraphicComponent.cpp
-    game/Command.cpp
-    game/InputManager.cpp
-    game/InputManagerBuild.cpp
-    game/GameLoop.cpp
+    game/SquareFactory.cpp
+    engine/GameLoop.cpp
     game/Particle.cpp
     game/ParticleCollection.cpp
+    input/CommandBuilder.cpp
+    input/Command.cpp
+    input/InputManager.cpp
+    input/InputManagerBuild.cpp
     sdl/SDLWrapper.cpp
     utility/Configurations.cpp
-    game/World.cpp
+    engine/Component.cpp
+    engine/GraphicComponent.cpp
+    engine/PhysicsComponent.cpp
+    engine/World.cpp
     )
 
 set(GRAVITY_HEADERS
@@ -64,18 +77,18 @@ set(GRAVITY_HEADERS
     graphics/Pixel.h
     graphics/PositionConversion.h
     game/Character.h
-    game/Command.h
-    game/World.h
-    game/Component.h
-    game/CommandBuilder.h
-    game/GraphicComponent.h
-    game/PhysicsComponent.h
+    input/Command.h
+    engine/World.h
+    engine/Component.h
+    input/CommandBuilder.h
+    engine/GraphicComponent.h
+    engine/PhysicsComponent.h
     game/SquareFactory.h
     game/SquarePhysicsComponent.h
     game/SquareGraphicComponent.h
-    game/InputManager.h
-    game/InputManagerBuild.h
-    game/GameLoop.h
+    input/InputManager.h
+    input/InputManagerBuild.h
+    engine/GameLoop.h
     game/Particle.h
     game/ParticleCollection.h
     sdl/SDLWrapper.h
@@ -84,7 +97,7 @@ set(GRAVITY_HEADERS
     )
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-ADD_EXECUTABLE ( Gravity ${GRAVITY_SOURCES} ${GRAVITY_HEADERS})
+ADD_EXECUTABLE ( Gravity ${GRAVITY_SOURCES} )
 
 #--------------------------------------------------
 # BOOST

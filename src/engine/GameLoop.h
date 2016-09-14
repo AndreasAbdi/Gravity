@@ -9,9 +9,9 @@
 #include "sdl/SDLWrapper.h"
 #include "utility/Configurations.h"
 #include "graphics/Screen.h"
-#include "game/World.h"
-#include "game/InputManager.h"
-#include "game/InputManagerBuild.h"
+#include "engine/World.h"
+#include "input/InputManager.h"
+#include "input/InputManagerBuild.h"
 
 namespace Gravity {
 

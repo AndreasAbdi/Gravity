@@ -1,8 +1,8 @@
 #pragma once
 
 #include <vector>
-#include "game/Command.h"
-#include "game/World.h"
+#include "input/Command.h"
+#include "engine/World.h"
 
 namespace Gravity {
 	class CommandBuilder {

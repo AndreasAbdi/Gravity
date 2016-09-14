@@ -1,8 +1,8 @@
 #pragma once 
 
 #include "game/Character.h"
-#include "game/GraphicComponent.h"
-#include "game/PhysicsComponent.h"
+#include "engine/GraphicComponent.h"
+#include "engine/PhysicsComponent.h"
 
 namespace Gravity {
 	class SquareGraphicComponent : public GraphicComponent {

@@ -1,9 +1,9 @@
 #pragma once
 #include <vector>
 #include "utility/vector2D.h"
-#include "game/Component.h"
-#include "game/GraphicComponent.h"
-#include "game/PhysicsComponent.h"
+#include "engine/Component.h"
+#include "engine/GraphicComponent.h"
+#include "engine/PhysicsComponent.h"
 
 namespace Gravity {
 

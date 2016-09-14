@@ -2,7 +2,7 @@
 #include "SDL.h"
 #include <map>
 #include <vector>
-#include "game/Command.h"
+#include "input/Command.h"
 
 namespace Gravity {
 	class InputManager {
