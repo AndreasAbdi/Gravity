@@ -13,6 +13,7 @@ namespace Gravity {
 		int index;
 	public:
 		Character();
+		~Character();
 		Character(World * inputWorld, int inputIndex) : world(inputWorld), index(inputIndex) {};
 
 		void update(Screen &screen);

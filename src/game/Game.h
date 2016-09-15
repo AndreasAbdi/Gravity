@@ -1,15 +1,15 @@
 #pragma once
-#include "game/Character.h"
+#include "game/Player.h"
+#include "game/PlayerFactory.h"
 #include "engine/World.h"
-#include "game/SquareGraphicComponent.h"
-#include "game/SquarePhysicsComponent.h"
 
 namespace Gravity {
 	class Game {
 	public:
-		Character player;
+		Player * player;
 		World world;
 		Game();
+		~Game();
 	private:
 		void createPlayer();
 	};
